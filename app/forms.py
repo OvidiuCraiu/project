@@ -22,3 +22,10 @@ class ContractForm(FlaskForm):
 class SearchForm(FlaskForm):
     search = StringField('Search', validators=[DataRequired()])
     submit = SubmitField('Search')
+
+class ContractCreationForm(FlaskForm):
+    title = StringField('Contract Title', validators=[DataRequired()])
+    party_one = StringField('Party One (Name)', validators=[DataRequired()])
+    party_two = StringField('Party Two (Name)', validators=[DataRequired()])
+    terms = TextAreaField('Contract Terms', validators=[DataRequired()])
+    submit = SubmitField('Create Contract')
