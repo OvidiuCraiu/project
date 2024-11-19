@@ -15,6 +15,9 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
+    with app.app_context():
+        db.create_all()  # This line creates the database tables
+
     from .routes import main, auth
     app.register_blueprint(main)
     app.register_blueprint(auth)
