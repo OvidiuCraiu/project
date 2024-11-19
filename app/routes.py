@@ -57,9 +57,15 @@ def dashboard():
 @main.route('/create_contract', methods=['GET', 'POST'])
 @login_required
 def create_contract():
-    form = ContractForm()
+    form = ContractCreationForm()
     if form.validate_on_submit():
-        contract = Contract(title=form.title.data, content=form.content.data, author=current_user)
+        contract = Contract(
+            title=form.title.data,
+            party_one=form.party_one.data,
+            party_two=form.party_two.data,
+            terms=form.terms.data,
+            author=current_user
+        )
         db.session.add(contract)
         db.session.commit()
         flash('Contract created successfully!', 'success')
