@@ -3,6 +3,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import User, Contract
 from .forms import LoginForm, RegistrationForm, ContractForm, SearchForm
 from . import db
+import os
+from flask import send_file
+from .pdf_generator import generate_contract_pdf
 
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
@@ -104,3 +107,17 @@ def search_contracts():
             Contract.title.contains(search_term) | Contract.content.contains(search_term)).all()
         return render_template('search_contracts.html', contracts=contracts, form=form)
     return render_template('search_contracts.html', form=form)
+
+@main.route('/export_contract/<int:id>')
+@login_required
+def export_contract(id):
+    contract = Contract.query.get_or_404(id)
+    if contract.author != current_user:
+        flash('You do not have permission to export this contract.', 'danger')
+        return redirect(url_for('main.dashboard'))
+    
+    filename = f"contract_{contract.id}.pdf"
+    filepath = os.path.join(app.instance_path, filename)
+    generate_contract_pdf(contract, filepath)
+    
+    return send_file(filepath, as_attachment=True, attachment_filename=filename)
