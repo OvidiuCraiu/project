@@ -11,6 +11,9 @@ from .pdf_generator import generate_contract_pdf
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 
+@main.route('/')
+def index():
+    return render_template('index.html')
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
