@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Search Contracts</h2>
+<form method="POST" action="{{ url_for('main.search_contracts') }}">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.search.label(class="form-control-label") }}
+        <div class="input-group">
+            {{ form.search(class="form-control") }}
+            <div class="input-group-append">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </div>
+    </div>
+</form>
+
+{% if contracts %}
+    <h3>Search Results:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.title }}</td>
+                <td>
+                    <a href="{{ url_for('main.edit_contract', id=contract.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% elif request.method == 'POST' %}
+    <p>No contracts found matching your search criteria.</p>
+{% endif %}
+{% endblock content %}
