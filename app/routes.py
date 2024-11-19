@@ -11,6 +11,10 @@ from .pdf_generator import generate_contract_pdf
 main = Blueprint('main', __name__)
 auth = Blueprint('auth', __name__)
 
+def init_routes(app):
+    app.register_blueprint(main)
+    app.register_blueprint(auth)
+
 @main.route('/')
 def index():
     return render_template('index.html')
