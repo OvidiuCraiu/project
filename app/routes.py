@@ -50,6 +50,7 @@ def index():
 @login_required
 def dashboard():
     contracts = current_user.contracts
+    contracts = Contract.query.all()
     return render_template('dashboard.html', contracts=contracts)
 
 
