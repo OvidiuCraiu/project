@@ -3,9 +3,9 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import User, Contract
 from .forms import LoginForm, RegistrationForm, ContractForm, SearchForm
 from .forms import ContractCreationForm
-from . import db
+from . import db, main
 import os
-from flask import send_file
+from flask import send_file, current_app
 from .pdf_generator import generate_contract_pdf
 
 main = Blueprint('main', __name__)
