@@ -22,6 +22,7 @@
                 <td>{{ contract.author.username }}</td>
                 <td>
                     <a href="{{ url_for('main.edit_contract', id=contract.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+                    <a href="{{ url_for('main.export_contract', id=contract.id) }}" class="btn btn-sm btn-info">Export PDF</a>
                 </td>
             </tr>
             {% endfor %}
