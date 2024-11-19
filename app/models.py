@@ -23,6 +23,8 @@ class User(UserMixin, db.Model):
 class Contract(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    party_one = db.Column(db.String(100), nullable=False)
+    party_two = db.Column(db.String(100), nullable=False)
+    terms = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     author = db.relationship('User', backref='contracts')
