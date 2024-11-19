@@ -15,3 +15,4 @@ CMD ["python", "run.py"]
 RUN pip install --upgrade pip
 RUN pip install flask-sqlalchemy
 RUN pip install "SQLAlchemy<2.0"
+RUN pip install reportlab
