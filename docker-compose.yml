@@ -10,3 +10,4 @@ services:
       - DATABASE_URL=sqlite:///contracts.db
     volumes:
       - .:/app
+      - ./instance:/app/instance
