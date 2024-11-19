@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<h3>Welcome, {{ current_user.username }}!</h3>
+<a href="{{ url_for('main.create_contract') }}" class="btn btn-primary mb-3">Create New Contract</a>
+
+<h4>All Contracts:</h4>
+{% if contracts %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contract in contracts %}
+            <tr>
+                <td>{{ contract.title }}</td>
+                <td>{{ contract.author.username }}</td>
+                <td>
+                    <a href="{{ url_for('main.edit_contract', id=contract.id) }}" class="btn btn-sm btn-secondary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No contracts have been created yet.</p>
+{% endif %}
+{% endblock content %}
