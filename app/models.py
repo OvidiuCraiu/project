@@ -27,4 +27,4 @@ class Contract(db.Model):
     party_two = db.Column(db.String(100), nullable=False)
     terms = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    author = db.relationship('User', backref='contracts')
+    author = db.relationship('User', back_populates='contracts')
